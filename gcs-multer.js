@@ -1,3 +1,18 @@
+class gcs_multer {
+  constructor(handler, uploader) {
+    this._handler = handler;
+    this.uploader = uploader;
+  }
+
+  getSignedURL(gcs_id, promptName) {
+    return handler.generateSignedURL(gcs_id, promptName);
+  }
+
+  getFileStream() {}
+
+  deleteFile() {}
+}
+
 module.exports = function (opts) {
   try {
     let { project_id, key_file, default_bucket } = opts;
@@ -9,10 +24,7 @@ module.exports = function (opts) {
       const handler = require("./GCS-Handler");
       const uploader = require("./GCS-Uploader");
 
-      return (multer = {
-        handler,
-        uploader,
-      });
+      return new gcs_multer(handler, uploader);
     }
     console.log(
       "The options should include project_id, key_file and default_bucket"

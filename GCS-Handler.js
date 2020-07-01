@@ -19,6 +19,8 @@ function generateSignedURL(gcs_id, saveAs) {
   });
 }
 
+function getFileStream(gcs_id) {}
+
 module.exports = {
   deleteFile,
   generateSignedURL,
