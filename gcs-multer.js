@@ -3,8 +3,8 @@ const listener = require("./listener");
 module.exports = class gcs_multer {
   constructor(opts) {
     this.setOpts(opts);
-    this.handler = require("./GCS-Handler");
-    this.uploader = require("./GCS-Uploader");
+    this.handler = require("./gcs-handler");
+    this.uploader = require("./gcs-uploader");
   }
 
   setOpts(opts) {
