@@ -1,12 +1,16 @@
 ## gcs-multer
 
-This module can be used to add file-upload funcionality to your app.
+This is a very simple module that can be used to add file-upload funcionality to your app. This module is the combination of the "multer" and "google-apis". Aim of this project is to help people to add file-upload functionality in a very easy way.
+
+#### Installation
+
+`npm install gcs-multer`
 
 #### Creating an Instance of gcs-multer
 
 For creating an instance of gcs-multer, you need to provide following three properties. These three properties must be given to enable gcs-multer to access google cloud storage
 
-````
+```
 const gcs_multer = require("gcs-multer");
 
 const gcsm = new gcs_multer({
@@ -14,7 +18,7 @@ const gcsm = new gcs_multer({
   key_file: "./wired-height-276615-c511781c0400.json",
   default_bucket: "oncoev_resources",
 });
-````
+```
 
 #### File uploading
 
@@ -38,7 +42,7 @@ Also, the request should be a multipart request which includes a file with the f
 
 The following is the download operation. gcs-multer generates a signed url for the file which can be used before the expiration date. In the following example, the url will redirect user to the download link and when the user downloads the file the file name will be prompted as the "original_file_name" to the user. User can use this url for the following 1 hour
 
-````
+```
 app.get("/:id", (req, res, next) => {
 
   let expiresAt = Date.now() + 1000*60*60
@@ -52,7 +56,7 @@ app.get("/:id", (req, res, next) => {
       //handle error
     });
 });
-````
+```
 
 #### File Stream
 
@@ -69,3 +73,13 @@ stream.pipe(process.stdout);
 Files can be deleted from the cloud simply by calling the deleteFile function.
 
 `gcsm.deleteFile("A6JrCdJpo");`
+
+---
+
+##### Author
+
+Nazmi Yılmaz
+
+* Github => [github.com/nazmi-yilmaz](https://)
+* npmjs  => [npmjs.com/~nazmiyilmaz](https://)
+* email   => nazmiyilmaz.gml@gmail.com
