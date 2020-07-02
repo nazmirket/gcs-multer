@@ -1,3 +1,5 @@
+const listener = require("./listener");
+
 module.exports = class gcs_multer {
   constructor(opts) {
     this.setOpts(opts);
@@ -6,11 +8,13 @@ module.exports = class gcs_multer {
   }
 
   setOpts(opts) {
-    let { project_id, key_file, default_bucket } = opts;
+    let { project_id, key_file, default_bucket, maxSize, isPublic } = opts;
     if (project_id && key_file && default_bucket) {
       process.env.MULTERGCS_PROJECT_ID = project_id;
       process.env.MULTERGCS_KEY_FILE = key_file;
       process.env.MULTERGCS_DEFAULT_BUCKET = default_bucket;
+      process.env.MULTERGCS_MAX_SIZE = maxSize ? maxsize : 9999999;
+      process.env.MULTERGCS_IS_PUBLIC_DEFAULT = isPublic ? isPublic : false;
     } else {
       console.error(
         "you need to give the specified options to instantiate gcs-multer"
@@ -27,5 +31,10 @@ module.exports = class gcs_multer {
 
   deleteFile(gcs_id) {
     return this.handler.deleteFile(gcs_id);
+  }
+
+  singleFile(action) {
+    this.uploader.setListener(new listener(action));
+    return this.uploader.single("file");
   }
 };
