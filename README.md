@@ -36,7 +36,7 @@ Also, the request should be a multipart request which includes a file with the f
 
 #### File Downloading
 
-* [ ] The following is the download operation. gcs-multer generates a signed url for the file which can be used before the expiration date. In the following example, the url will redirect user to the download link and when the user downloads the file the file name will be prompted as the "original_file_name" to the user. User can use this url for the following 1 hour
+The following is the download operation. gcs-multer generates a signed url for the file which can be used before the expiration date. In the following example, the url will redirect user to the download link and when the user downloads the file the file name will be prompted as the "original_file_name" to the user. User can use this url for the following 1 hour
 
 ````
 app.get("/:id", (req, res, next) => {
@@ -55,5 +55,13 @@ app.get("/:id", (req, res, next) => {
 ````
 
 #### File Stream
+
+The files can also be reached as streams. Following is an example of this operation.
+
+````
+let stream = gcsm.getFileStream("A6JrCdJpo");
+
+stream.pipe(process.stdout);
+````
 
 #### Removing Files

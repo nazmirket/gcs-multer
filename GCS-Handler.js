@@ -11,17 +11,20 @@ function deleteFile(gcs_id) {
   return Bucket.file(gcs_id).delete();
 }
 
-function generateSignedURL(gcs_id, saveAs) {
+function generateSignedURL(gcs_id, saveAs, expiresAt) {
   return Bucket.file(gcs_id).getSignedUrl({
     action: "read",
-    expires: Date.now() + 2 * 24 * 1000 * 60 * 60,
+    expires: expiresAt,
     promptSaveAs: saveAs,
   });
 }
 
-function getFileStream(gcs_id) {}
+function getFileStream(gcs_id) {
+  return Bucket.file(gcs_id).createReadStream();
+}
 
 module.exports = {
   deleteFile,
   generateSignedURL,
+  getFileStream,
 };

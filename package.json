@@ -1,6 +1,6 @@
 {
   "name": "gcs-multer",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "This module can be used to add file uploading functionality to your server by using multer and google cloud server",
   "main": "gcs-multer.js",
   "scripts": {

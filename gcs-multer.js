@@ -18,10 +18,14 @@ module.exports = class gcs_multer {
     }
   }
 
-  getSignedURL(gcs_id, promptName) {
-    return this.handler.generateSignedURL(gcs_id, promptName);
+  getSignedURL(gcs_id, promptName, expiresAt) {
+    return this.handler.generateSignedURL(gcs_id, promptName, expiresAt);
   }
-  getFileStream() {}
+  getFileStream(gcs_id) {
+    return this.handler.getFileStream(gcs_id);
+  }
 
-  deleteFile() {}
+  deleteFile(gcs_id) {
+    return this.handler.deleteFile(gcs_id);
+  }
 };
