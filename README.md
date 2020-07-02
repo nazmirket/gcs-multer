@@ -65,3 +65,7 @@ stream.pipe(process.stdout);
 ````
 
 #### Removing Files
+
+Files can be deleted from the cloud simply by calling the deleteFile function.
+
+`gcsm.deleteFile("A6JrCdJpo");`
