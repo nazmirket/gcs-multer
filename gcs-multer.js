@@ -1,37 +1,27 @@
-class gcs_multer {
-  constructor(handler, uploader) {
-    this._handler = handler;
-    this.uploader = uploader;
+module.exports = class gcs_multer {
+  constructor(opts) {
+    this.setOpts(opts);
+    this.handler = require("./GCS-Handler");
+    this.uploader = require("./GCS-Uploader");
   }
 
-  getSignedURL(gcs_id, promptName) {
-    return handler.generateSignedURL(gcs_id, promptName);
-  }
-
-  getFileStream() {}
-
-  deleteFile() {}
-}
-
-module.exports = function (opts) {
-  try {
+  setOpts(opts) {
     let { project_id, key_file, default_bucket } = opts;
     if (project_id && key_file && default_bucket) {
       process.env.MULTERGCS_PROJECT_ID = project_id;
       process.env.MULTERGCS_KEY_FILE = key_file;
       process.env.MULTERGCS_DEFAULT_BUCKET = default_bucket;
-
-      const handler = require("./GCS-Handler");
-      const uploader = require("./GCS-Uploader");
-
-      return new gcs_multer(handler, uploader);
+    } else {
+      console.error(
+        "you need to give the specified options to instantiate gcs-multer"
+      );
     }
-    console.log(
-      "The options should include project_id, key_file and default_bucket"
-    );
-    return null;
-  } catch (error) {
-    console.log(error);
-    return null;
   }
+
+  getSignedURL(gcs_id, promptName) {
+    return this.handler.generateSignedURL(gcs_id, promptName);
+  }
+  getFileStream() {}
+
+  deleteFile() {}
 };
