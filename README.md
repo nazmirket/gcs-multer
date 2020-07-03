@@ -52,7 +52,7 @@ In the example above, "action()" function is called in each step of the upload o
 
 [upload-console-logs.jpg](github.com/nazmi-yilmaz/gcs-multer/blob/master/upload_console.png)
 
-* [ ] This feature is added to the project to enable developers to reflect the progress to the user while the uploading operation continues.
+This feature is added to the project to enable developers to reflect the progress to the user while the uploading operation continues.
 
 #### File Downloading
 
