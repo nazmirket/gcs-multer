@@ -17,6 +17,8 @@ const gcsm = new gcs_multer({
   project_id: "wired-height-276615",
   key_file: "./wired-height-276615-c511781c0400.json",
   default_bucket: "oncoev_resources",
+  max_size: 1024 * 1024 * 16, //optional
+  is_public: false, //optional
 });
 ```
 
@@ -28,15 +30,27 @@ Since these files are uploaded to the cloud with automatically generated unique 
 
 Also, the request should be a multipart request which includes a file with the field name 'file'
 
-````
- app.post("/", gcsm.uploader.single("file"), (req, res, next) => {
+```
+// Listener for the progress of the upload operation
+const action = (info) => {
+  console.log(info); // this function can be used to see the progress 
+};
+
+// Add gcs-multer as a middleware
+app.post("/", gcsm.singleFile(action), (req, res, next) => {
   const name = req.filename;
   const id = req.gcs_id;
 
-  console.log(name, id);
+  console.log(`uploaded file          : ${name}`);
+  console.log(`uploded file's gcs_id  : ${id}`);
 });
+```
 
-````
+In the example above, "action()" function is called in each step of the upload operation. Following is the console logs of this operation
+
+![upload_console.png](./upload_console.png)
+
+This feature is added to the project to enable developers to reflect the progress to the user while the uploading operation continues.
 
 #### File Downloading
 

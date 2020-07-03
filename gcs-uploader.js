@@ -34,7 +34,7 @@ async function _uploadFile(req, file, callback) {
 
   (() => {
     let start = Date.now();
-    let total = req.headers["content-length"];
+    let total = parseInt(req.headers["content-length"]);
 
     listener.setStart(start);
     listener.setTotal(total);
@@ -51,6 +51,7 @@ async function _uploadFile(req, file, callback) {
     req.gcs_id = gcs_file_id;
 
     listener.onAction(null, true);
+    callback(null);
   });
 
   writeStream.on("error", (err) => {
